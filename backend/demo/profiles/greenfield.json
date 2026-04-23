@@ -1,0 +1,21 @@
+{
+  "profile_id": "greenfield",
+  "profile": {
+    "company_name": "Greenfield Family Clinic",
+    "domain": "greenfieldclinic.health",
+    "industry": "healthcare",
+    "employee_count": 42,
+    "tech_stack": ["Microsoft Exchange 2019", "Windows Server 2019", "Veeam Backup", "Meditech EHR", "Outlook"],
+    "ip_range": "203.0.113.0/24"
+  },
+  "sample_suspicious_ip": "203.0.113.45",
+  "scripted_timeline": {
+    "otx.get_pulses": "greenfield_pulses.json",
+    "hibp.check_domain": "greenfield_hibp.json",
+    "abuseipdb.check_ip": "greenfield_abuse.json",
+    "nvd.query_cves": "greenfield_nvd.json",
+    "mitre.match_techniques": "greenfield_mitre.json"
+  },
+  "expected_posture_score": 32,
+  "narrative": "Small clinic with unpatched Exchange server, active ransomware campaign targeting healthcare, and weak identity posture."
+}

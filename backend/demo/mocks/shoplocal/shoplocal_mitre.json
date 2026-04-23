@@ -1,0 +1,16 @@
+[
+  {
+    "technique_id": "T1189",
+    "technique_name": "Drive-by Compromise",
+    "tactic": "Initial Access",
+    "description": "Adversaries may gain access to a system through a user visiting a website containing a skimmer or exploit kit, typical of the low-volume e-commerce skimmer trend observed this month.",
+    "similarity_score": 0.74
+  },
+  {
+    "technique_id": "T1036",
+    "technique_name": "Masquerading",
+    "tactic": "Defense Evasion",
+    "description": "Skimmer JavaScript frequently masquerades as a legitimate analytics or payment-processor script to blend into the DOM of a compromised storefront.",
+    "similarity_score": 0.68
+  }
+]

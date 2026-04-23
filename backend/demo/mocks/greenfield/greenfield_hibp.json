@@ -1,0 +1,13 @@
+{
+  "domain": "greenfieldclinic.health",
+  "breached": true,
+  "breach_count": 1,
+  "breaches": [
+    {
+      "breach_name": "MyFitnessPal 2018",
+      "date": "2018-02-01",
+      "pwn_count": 150000000,
+      "data_classes": ["Email addresses", "IP addresses", "Names", "Passwords"]
+    }
+  ]
+}

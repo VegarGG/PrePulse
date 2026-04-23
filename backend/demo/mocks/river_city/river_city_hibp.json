@@ -1,0 +1,19 @@
+{
+  "domain": "rivercity.fin",
+  "breached": true,
+  "breach_count": 2,
+  "breaches": [
+    {
+      "breach_name": "LinkedIn 2021 Scrape",
+      "date": "2021-04-05",
+      "pwn_count": 700000000,
+      "data_classes": ["Email addresses", "Names", "Professional profiles"]
+    },
+    {
+      "breach_name": "Collection #1 Credential Dump",
+      "date": "2019-01-17",
+      "pwn_count": 772904991,
+      "data_classes": ["Email addresses", "Passwords"]
+    }
+  ]
+}

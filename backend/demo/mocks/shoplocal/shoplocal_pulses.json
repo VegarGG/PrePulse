@@ -1,0 +1,11 @@
+[
+  {
+    "pulse_id": "otx-2026-04-15-ecommerce-skimmer-low",
+    "title": "Low-Volume E-commerce Skimmer Trend",
+    "description": "Small uptick in JavaScript skimmer deployments against mid-market e-commerce storefronts. No confirmed victim in the Shopify Plus tier in the past 30 days.",
+    "threat_level": 2,
+    "industry_targeted": "e-commerce",
+    "tags": ["skimmer", "ecommerce", "javascript"],
+    "first_seen": "2026-04-15T12:00:00Z"
+  }
+]

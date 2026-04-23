@@ -1,0 +1,38 @@
+[
+  {
+    "pulse_id": "otx-2026-04-12-banking-trojan-grandoreiro",
+    "title": "Grandoreiro Banking Trojan — North America Campaign",
+    "description": "Active spearphishing campaign targeting US/Canada regional banks and credit unions. Payload delivered via malicious PDF attachments impersonating tax documents.",
+    "threat_level": 4,
+    "industry_targeted": "fintech",
+    "tags": ["banking-trojan", "spearphishing", "financial", "north-america"],
+    "first_seen": "2026-04-12T08:30:00Z"
+  },
+  {
+    "pulse_id": "otx-2026-04-10-magecart-cardskimmer",
+    "title": "Magecart Cardskimmer v7 — Payment Page Injection",
+    "description": "JavaScript cardskimmer variant targeting Stripe and PayPal checkout integrations. Uses DOM manipulation to exfiltrate card data to attacker-controlled domains.",
+    "threat_level": 5,
+    "industry_targeted": "fintech",
+    "tags": ["cardskimmer", "magecart", "stripe", "payment"],
+    "first_seen": "2026-04-10T14:11:00Z"
+  },
+  {
+    "pulse_id": "otx-2026-04-08-aws-lambda-rce-poc",
+    "title": "AWS Lambda CVE-2026-10234 Exploit PoC Released",
+    "description": "Public proof-of-concept for remote code execution in AWS Lambda custom runtimes via malformed event payloads. Observed in targeted attacks on fintech companies.",
+    "threat_level": 5,
+    "industry_targeted": "fintech",
+    "tags": ["aws", "lambda", "rce", "cve-2026-10234"],
+    "first_seen": "2026-04-08T09:00:00Z"
+  },
+  {
+    "pulse_id": "otx-2026-04-05-oauth-token-harvest",
+    "title": "OAuth Token Harvesting via Third-Party Slack Apps",
+    "description": "Attackers compromising fintech Slack workspaces by tricking users into installing malicious Slack apps that exfiltrate OAuth tokens.",
+    "threat_level": 3,
+    "industry_targeted": "fintech",
+    "tags": ["oauth", "slack", "social-engineering"],
+    "first_seen": "2026-04-05T11:22:00Z"
+  }
+]

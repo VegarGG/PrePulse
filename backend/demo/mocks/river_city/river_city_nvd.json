@@ -1,0 +1,29 @@
+[
+  {
+    "cve_id": "CVE-2026-10234",
+    "severity": "CRITICAL",
+    "cvss_score": 9.8,
+    "description": "AWS Lambda custom runtime remote code execution via malformed event payload parsing. Attacker can execute arbitrary code in the Lambda execution environment without authentication.",
+    "affected_product": "AWS Lambda",
+    "exploit_available": true,
+    "published": "2026-04-02"
+  },
+  {
+    "cve_id": "CVE-2025-49112",
+    "severity": "HIGH",
+    "cvss_score": 8.1,
+    "description": "PostgreSQL logical replication slot privilege escalation. Authenticated user can gain superuser privileges via crafted replication request.",
+    "affected_product": "PostgreSQL",
+    "exploit_available": false,
+    "published": "2025-12-15"
+  },
+  {
+    "cve_id": "CVE-2025-37881",
+    "severity": "HIGH",
+    "cvss_score": 7.5,
+    "description": "Stripe SDK signature verification bypass in webhook handling. Attacker can forge webhook payloads that appear to be signed by Stripe.",
+    "affected_product": "Stripe",
+    "exploit_available": true,
+    "published": "2025-10-09"
+  }
+]

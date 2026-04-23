@@ -1,0 +1,38 @@
+[
+  {
+    "cve_id": "CVE-2023-23397",
+    "severity": "CRITICAL",
+    "cvss_score": 9.8,
+    "description": "Microsoft Outlook elevation of privilege vulnerability. Specially crafted email triggers NTLM hash leak against an attacker-controlled SMB endpoint, enabling pass-the-hash attacks.",
+    "affected_product": "Microsoft Exchange 2019",
+    "exploit_available": true,
+    "published": "2023-03-14"
+  },
+  {
+    "cve_id": "CVE-2024-21413",
+    "severity": "CRITICAL",
+    "cvss_score": 9.8,
+    "description": "Microsoft Outlook remote code execution via Moniker Link bypass of Protected View. Allows RCE when the user previews a crafted email.",
+    "affected_product": "Outlook",
+    "exploit_available": true,
+    "published": "2024-02-13"
+  },
+  {
+    "cve_id": "CVE-2024-20700",
+    "severity": "HIGH",
+    "cvss_score": 7.5,
+    "description": "Windows Server 2019 Hyper-V remote code execution via crafted VHD image ingestion.",
+    "affected_product": "Windows Server 2019",
+    "exploit_available": false,
+    "published": "2024-01-09"
+  },
+  {
+    "cve_id": "CVE-2023-38203",
+    "severity": "HIGH",
+    "cvss_score": 7.8,
+    "description": "Veeam Backup & Replication authenticated RCE via deserialization in the configuration database endpoint.",
+    "affected_product": "Veeam Backup",
+    "exploit_available": true,
+    "published": "2023-08-15"
+  }
+]

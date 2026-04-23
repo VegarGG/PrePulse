@@ -1,0 +1,21 @@
+{
+  "profile_id": "shoplocal",
+  "profile": {
+    "company_name": "ShopLocal Marketplace",
+    "domain": "shoplocal.market",
+    "industry": "e-commerce",
+    "employee_count": 120,
+    "tech_stack": ["Shopify", "Cloudflare", "MySQL", "Stripe", "Twilio"],
+    "ip_range": "192.0.2.0/24"
+  },
+  "sample_suspicious_ip": "192.0.2.10",
+  "scripted_timeline": {
+    "otx.get_pulses": "shoplocal_pulses.json",
+    "hibp.check_domain": "shoplocal_hibp.json",
+    "abuseipdb.check_ip": "shoplocal_abuse.json",
+    "nvd.query_cves": "shoplocal_nvd.json",
+    "mitre.match_techniques": "shoplocal_mitre.json"
+  },
+  "expected_posture_score": 72,
+  "narrative": "Mid-market e-commerce marketplace with clean posture: no breaches, minor CVEs, low active-threat count."
+}

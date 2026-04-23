@@ -1,0 +1,23 @@
+[
+  {
+    "technique_id": "T1566.001",
+    "technique_name": "Spearphishing Attachment",
+    "tactic": "Initial Access",
+    "description": "Adversaries may send spearphishing emails with a malicious attachment to elicit sensitive information or gain access to victim systems. In the banking-trojan case the attachment is a weaponized PDF impersonating a tax document.",
+    "similarity_score": 0.89
+  },
+  {
+    "technique_id": "T1190",
+    "technique_name": "Exploit Public-Facing Application",
+    "tactic": "Initial Access",
+    "description": "Adversaries may attempt to exploit a weakness in an Internet-facing host or system. Here the Lambda function URL is targeted via malformed event payloads (CVE-2026-10234).",
+    "similarity_score": 0.92
+  },
+  {
+    "technique_id": "T1078",
+    "technique_name": "Valid Accounts",
+    "tactic": "Initial Access",
+    "description": "Adversaries may obtain and abuse credentials of existing accounts. Relevant given credential dumps surfacing in historical breaches involving the rivercity.fin domain.",
+    "similarity_score": 0.81
+  }
+]

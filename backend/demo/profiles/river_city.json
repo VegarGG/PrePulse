@@ -1,0 +1,21 @@
+{
+  "profile_id": "river_city",
+  "profile": {
+    "company_name": "River City Financial Services",
+    "domain": "rivercity.fin",
+    "industry": "fintech",
+    "employee_count": 87,
+    "tech_stack": ["AWS Lambda", "PostgreSQL", "Stripe", "GitHub Enterprise", "Slack"],
+    "ip_range": "198.51.100.0/24"
+  },
+  "sample_suspicious_ip": "198.51.100.23",
+  "scripted_timeline": {
+    "otx.get_pulses": "river_city_pulses.json",
+    "hibp.check_domain": "river_city_hibp.json",
+    "abuseipdb.check_ip": "river_city_abuse.json",
+    "nvd.query_cves": "river_city_nvd.json",
+    "mitre.match_techniques": "river_city_mitre.json"
+  },
+  "expected_posture_score": 48,
+  "narrative": "Regional fintech with breached domain and exploitable Lambda CVE. Active banking-trojan campaign targeting the industry."
+}

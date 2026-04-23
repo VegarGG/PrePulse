@@ -1,0 +1,29 @@
+[
+  {
+    "pulse_id": "otx-2026-04-18-blackbasta-healthcare",
+    "title": "BlackBasta Ransomware — Regional Clinics Targeted",
+    "description": "Active ransomware campaign targeting small healthcare providers across the Midwest United States. Initial access via phishing and unpatched Exchange servers; lateral movement via Cobalt Strike.",
+    "threat_level": 5,
+    "industry_targeted": "healthcare",
+    "tags": ["ransomware", "blackbasta", "healthcare", "exchange"],
+    "first_seen": "2026-04-18T03:15:00Z"
+  },
+  {
+    "pulse_id": "otx-2026-04-14-phi-exfiltration",
+    "title": "PHI Exfiltration via Misconfigured EHR APIs",
+    "description": "Ongoing campaign abusing weakly authenticated FHIR endpoints on Meditech and Epic integrations to exfiltrate protected health information.",
+    "threat_level": 4,
+    "industry_targeted": "healthcare",
+    "tags": ["phi", "ehr", "fhir", "data-exfiltration"],
+    "first_seen": "2026-04-14T10:40:00Z"
+  },
+  {
+    "pulse_id": "otx-2026-04-11-exchange-proxy-not-shell",
+    "title": "Exchange 2019 ProxyNotShell Variant Back in Circulation",
+    "description": "Variant of ProxyNotShell (CVE-2022-41040/41082 chain) actively exploited against unpatched Exchange 2019 on-prem servers in healthcare and legal verticals.",
+    "threat_level": 5,
+    "industry_targeted": "healthcare",
+    "tags": ["exchange", "proxy-not-shell", "on-prem", "rce"],
+    "first_seen": "2026-04-11T07:05:00Z"
+  }
+]

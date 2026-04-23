@@ -1,0 +1,20 @@
+[
+  {
+    "cve_id": "CVE-2025-41220",
+    "severity": "MEDIUM",
+    "cvss_score": 5.4,
+    "description": "MySQL stored cross-site scripting in table comment fields rendered by Workbench. Requires authenticated DBA access.",
+    "affected_product": "MySQL",
+    "exploit_available": false,
+    "published": "2025-11-20"
+  },
+  {
+    "cve_id": "CVE-2025-52010",
+    "severity": "LOW",
+    "cvss_score": 3.1,
+    "description": "Cloudflare Workers information disclosure via timing side-channel in KV namespace enumeration.",
+    "affected_product": "Cloudflare",
+    "exploit_available": false,
+    "published": "2025-12-02"
+  }
+]
