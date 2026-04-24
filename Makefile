@@ -12,13 +12,13 @@ bootstrap:
 	@echo "bootstrap complete — run 'make dev' to start both servers"
 
 backend:
-	$(VENV)/bin/uvicorn backend.main:app --reload --port 8000
+	$(VENV)/bin/uvicorn backend.main:app --reload --port 8001
 
 frontend:
 	cd frontend && npm run dev
 
 dev:
-	@echo "Starting backend on :8000 and frontend on :3000 …"
+	@echo "Starting backend on :8001 and frontend on :3000 …"
 	@$(MAKE) -j 2 backend frontend
 
 test:

@@ -7,6 +7,20 @@ with the canonical spec.
 
 ---
 
+## Operational deviations
+
+### Backend port moved to 8001
+The spec uses `:8000` throughout (§5 architecture diagram, Appendix A.9
+smoke-test, §26 Phase-4 acceptance check, Pre-flight checklist). The
+implementation listens on `:8001` instead — `:8000` was consistently
+occupied on the developer's machine by another process, and picking a
+free port is less disruptive than diagnosing the squatter. Every
+operational file (`Makefile`, `README.md`, `.env.example`,
+`frontend/lib/api.ts`) was updated consistently; the architecture doc at
+the repo root still reads `:8000` as the historical spec of record.
+
+---
+
 ## Phase 3 — Multi-agent backend
 
 ### 1. Anthropic tool-name aliasing

@@ -66,7 +66,7 @@ Two terminals:
 ```bash
 # terminal 1 — backend
 source .venv/bin/activate
-uvicorn backend.main:app --port 8000
+uvicorn backend.main:app --port 8001
 ```
 
 You will see the startup banner:
@@ -138,7 +138,7 @@ overridden by exporting shell env vars.
 | `PREPULSE_SKIP_SEED` | *(unset)* | `1` skips the 30-day history seed on startup. |
 | `PREPULSE_APPROVAL_TIMEOUT` | `120` | Seconds the orchestrator waits for a human approval before rejecting. |
 | `OTX_API_KEY` · `HIBP_API_KEY` · `ABUSEIPDB_API_KEY` · `NVD_API_KEY` | *(empty)* | Only consulted when `PREPULSE_LIVE=1`. |
-| `NEXT_PUBLIC_API_BASE` | `http://localhost:8000` | Frontend → backend URL. |
+| `NEXT_PUBLIC_API_BASE` | `http://localhost:8001` | Frontend → backend URL. |
 
 ## Tests
 
