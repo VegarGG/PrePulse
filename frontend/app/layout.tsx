@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { AppShell } from "@/components/shell/AppShell";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
@@ -31,6 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AppShell>{children}</AppShell>
+        <ChatWidget />
         <Toaster richColors position="top-right" />
       </body>
     </html>

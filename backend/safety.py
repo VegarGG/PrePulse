@@ -33,3 +33,29 @@ def validate_profile(profile: CompanyProfile) -> None:
                         "field": field[:60],
                     },
                 )
+
+
+def check_chat_input(message: str) -> None:
+    """Lightweight prompt-injection check for free-form chat input.
+
+    The chatbot system prompt is the primary guardrail (it scopes the model
+    and demands structured output), but flagging obvious jailbreaks here
+    short-circuits the LLM call entirely.
+    """
+    if not isinstance(message, str):
+        raise HTTPException(400, {"error": "invalid_message", "reason": "must be a string"})
+    if len(message) > 2000:
+        raise HTTPException(
+            400,
+            {"error": "message_too_long", "reason": "max 2000 characters"},
+        )
+    for pat in _INJECTION_PATTERNS:
+        if pat.search(message):
+            raise HTTPException(
+                status_code=400,
+                detail={
+                    "error": "input_validation_failed",
+                    "reason": "prompt_injection_suspected",
+                    "preview": message[:80],
+                },
+            )

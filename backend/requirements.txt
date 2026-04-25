@@ -26,6 +26,9 @@ langgraph==0.2.40
 pandas==2.2.3
 numpy==1.26.4
 
+# Note: chatbot semantic-similarity gate calls the HuggingFace Inference API
+# via httpx (already pinned above). No local embedding library required.
+
 # --- Dev / test ---
 pytest==8.3.3
 pytest-asyncio==0.24.0

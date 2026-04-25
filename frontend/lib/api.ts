@@ -95,6 +95,41 @@ export async function getMetrics(): Promise<DashboardMetrics> {
   return request("/api/dashboard/metrics");
 }
 
+// ---------- Chat ----------
+
+export interface ChatTurn {
+  role: "user" | "assistant";
+  content: string;
+}
+
+export interface ChatTopChunk {
+  filename: string;
+  similarity: number;
+  preview: string;
+}
+
+export type ChatDecisionPath =
+  | "similarity_low"
+  | "llm_in_scope"
+  | "llm_refused"
+  | "parse_failed";
+
+export interface ChatResponse {
+  answer: string;
+  is_in_scope: boolean;
+  similarity: number;
+  decision_path: ChatDecisionPath;
+  top_chunks: ChatTopChunk[];
+  refusal_sentence: string;
+}
+
+export async function sendChat(messages: ChatTurn[]): Promise<ChatResponse> {
+  return request("/api/chat", {
+    method: "POST",
+    body: JSON.stringify({ messages }),
+  });
+}
+
 export function sseUrl(scanId: string): string {
   return `${API_BASE}/api/scans/${encodeURIComponent(scanId)}/events`;
 }
