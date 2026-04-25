@@ -1,0 +1,41 @@
+{
+  "scenario_id": "example_river_city",
+  "narrative": "Regional fintech (87 employees) running AWS Lambda, PostgreSQL, Stripe. Domain has appeared in two historical breaches. An exploitable Lambda CVE (CVE-2026-10234, CVSS 9.8) is publicly weaponised, and a Grandoreiro banking-trojan campaign is targeting North American fintechs. An expert would expect: Intelligence to flag at least the banking-trojan + Lambda PoC pulses; Validator to surface CVE-2026-10234 with exploit_available=true and map to T1190; Hardening to rotate the MTD port map; Investigator to publish a posture around 48 (Grade D); Remediator to propose blocking the suspicious IP and forcing MFA; Supervisor to approve with conditional confidence given the elevated risk.",
+  "profile": {
+    "company_name": "River City Financial Services",
+    "domain": "rivercity.fin",
+    "industry": "fintech",
+    "employee_count": 87,
+    "tech_stack": ["AWS Lambda", "PostgreSQL", "Stripe", "GitHub Enterprise", "Slack"],
+    "ip_range": "198.51.100.0/24"
+  },
+  "expected": {
+    "intelligence": {
+      "min_active_campaigns": 2,
+      "domain_breached": true,
+      "must_cite_pulses": ["banking-trojan", "lambda"]
+    },
+    "validator": {
+      "must_cite_cves": ["CVE-2026-10234"],
+      "must_cite_techniques": ["T1190"],
+      "min_exploitable_count": 1
+    },
+    "hardening": {
+      "min_actions": 1,
+      "preferred_kinds": ["mtd_port_rotation", "mtd_cert_refresh"]
+    },
+    "investigator": {
+      "expected_posture_score": 48,
+      "expected_grade": "D",
+      "must_link_cves": ["CVE-2026-10234"],
+      "must_link_techniques": ["T1190"]
+    },
+    "remediator": {
+      "must_propose_kinds": ["firewall.block_ip", "iam.force_mfa", "ticketing.open_incident"],
+      "max_actions": 5
+    },
+    "supervisor": {
+      "expected_sign_off": ["approved", "conditional"]
+    }
+  }
+}

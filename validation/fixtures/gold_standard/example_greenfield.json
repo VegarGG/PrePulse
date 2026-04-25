@@ -1,0 +1,41 @@
+{
+  "scenario_id": "example_greenfield",
+  "narrative": "Small healthcare clinic (42 employees) running Microsoft Exchange 2019, Windows Server 2019, Veeam Backup, Meditech EHR. CVE-2023-23397 is publicly known; a BlackBasta ransomware campaign is actively targeting healthcare; a high-confidence abuse IP is probing the network. Expert expectation: Intelligence flags ransomware + Exchange-targeted pulses; Validator surfaces CVE-2023-23397 + Veeam CVEs and maps to T1486 (data encrypted for impact) + T1190; Hardening rotates ports and refreshes certs; Investigator publishes a critical posture around 32 (Grade F) and the orchestrator routes to Remediator; Remediator proposes IP block + MFA force + endpoint isolate + incident ticket; Supervisor escalates to human review.",
+  "profile": {
+    "company_name": "Greenfield Family Clinic",
+    "domain": "greenfieldclinic.health",
+    "industry": "healthcare",
+    "employee_count": 42,
+    "tech_stack": ["Microsoft Exchange 2019", "Windows Server 2019", "Veeam Backup", "Meditech EHR", "Outlook"],
+    "ip_range": "203.0.113.0/24"
+  },
+  "expected": {
+    "intelligence": {
+      "min_active_campaigns": 2,
+      "domain_breached": true,
+      "must_cite_pulses": ["ransomware", "exchange"]
+    },
+    "validator": {
+      "must_cite_cves": ["CVE-2023-23397"],
+      "must_cite_techniques": ["T1486", "T1190"],
+      "min_exploitable_count": 1
+    },
+    "hardening": {
+      "min_actions": 2,
+      "preferred_kinds": ["mtd_port_rotation", "mtd_cert_refresh"]
+    },
+    "investigator": {
+      "expected_posture_score": 32,
+      "expected_grade": "F",
+      "must_link_cves": ["CVE-2023-23397"],
+      "must_link_techniques": ["T1486"]
+    },
+    "remediator": {
+      "must_propose_kinds": ["firewall.block_ip", "iam.force_mfa", "endpoint.isolate", "ticketing.open_incident"],
+      "max_actions": 5
+    },
+    "supervisor": {
+      "expected_sign_off": ["escalate", "conditional"]
+    }
+  }
+}

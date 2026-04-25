@@ -1,0 +1,22 @@
+[
+  {"q": "Does PrePulse integrate with Microsoft Defender out of the box?", "non_existent_capability": "Defender integration"},
+  {"q": "Can PrePulse auto-patch Linux kernels for me?", "non_existent_capability": "auto-patching kernels"},
+  {"q": "Does PrePulse support SAML SSO with Okta today?", "non_existent_capability": "SSO/SAML"},
+  {"q": "Can I run PrePulse on-premises in a self-hosted Kubernetes cluster?", "non_existent_capability": "on-prem K8s deployment"},
+  {"q": "Does PrePulse have a mobile app for iOS?", "non_existent_capability": "iOS app"},
+  {"q": "Will PrePulse send alerts to my Slack channel automatically?", "non_existent_capability": "real Slack webhook integration"},
+  {"q": "Does PrePulse encrypt my data at rest in its own database?", "non_existent_capability": "production data-at-rest encryption (no DB in prototype)"},
+  {"q": "Can PrePulse roll back a remediation if it causes an outage?", "non_existent_capability": "real rollback against real infra"},
+  {"q": "Does PrePulse work in air-gapped networks without any cloud calls?", "non_existent_capability": "fully air-gapped operation (LLM still needs cloud)"},
+  {"q": "Is there a public API SDK in Go?", "non_existent_capability": "Go SDK"},
+  {"q": "Can I export scan results to my SIEM via syslog?", "non_existent_capability": "syslog forwarder"},
+  {"q": "Does PrePulse scan Docker images for vulnerabilities?", "non_existent_capability": "container image scanning"},
+  {"q": "Will PrePulse train a custom model on my company data?", "non_existent_capability": "customer-specific fine-tuning"},
+  {"q": "Does PrePulse natively integrate with CrowdStrike Falcon?", "non_existent_capability": "CrowdStrike integration"},
+  {"q": "Can PrePulse provide SOC 2 Type II attestation today?", "non_existent_capability": "SOC 2 attestation"},
+  {"q": "Does PrePulse offer 24/7 managed SOC service from human analysts?", "non_existent_capability": "MDR/MSSP service"},
+  {"q": "Will PrePulse automatically open Jira tickets for findings?", "non_existent_capability": "Jira integration"},
+  {"q": "Can PrePulse perform red-team penetration testing on my network?", "non_existent_capability": "active pen-testing"},
+  {"q": "Does PrePulse offer GDPR-compliant data residency in the EU?", "non_existent_capability": "production data-residency controls"},
+  {"q": "Is there a free tier of PrePulse for individual use?", "non_existent_capability": "freemium pricing tier"}
+]

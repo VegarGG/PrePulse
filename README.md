@@ -158,3 +158,72 @@ Known-good counts: **39** tool/scoring · **21** safety · **12** API (non-integ
 ## Known deviations from the architecture spec
 
 See [`SPEC_DEVIATIONS.md`](SPEC_DEVIATIONS.md) for the running log.
+
+## Validation campaign — brief
+
+Implementing the auto-runnable subset of `PrePulse_Validation_Testing_Plan.md`
+under [`validation/`](validation/). Standalone runner; per-test JSONL with the
+plan's §5.1 schema; combined `all_runs.jsonl` per campaign.
+
+**Headline (281 results across the F-01..F-35 surface):**
+
+| Result | Count | Note |
+|---|---:|---|
+| pass | **186** | majority of the deterministic + in-process surface |
+| fail | 18 | all prototype-side (see below) |
+| error | 3 | one chat request, one judge crash, one agent crash |
+| inconclusive | 74 | almost entirely Anthropic rate-limit during the chatbot run |
+
+**Tests at 100% pass-rate:** F-01/04/07/10/13 (75/75 schema conformance),
+F-05 (MITRE ids), F-08 (tool registry), F-12 (Remediator routing),
+F-15 (posture determinism in-process), F-19 (SSE event taxonomy),
+F-20 (trace JSONL fidelity), F-22 (frontend routes), F-25 (trace bytes
+stable), F-28 (no capability hallucination, 21/21), F-32 (LLM fallback
+wired), F-34 (schema rejection), F-35 (injection canaries 14/14).
+
+**Real prototype-side findings the campaign surfaced:**
+
+- **F-33 / F-18 — posture-score drift.** LLM-driven Hardening agent
+  consistently over-credits `risk_reduction_estimate`, pushing greenfield
+  posture from spec=32 → 47, shoplocal 72 → 99. The high score skips
+  Remediator (§11 conditional route) → only 5 agents fire (test required
+  ≥6). Recommend tightening Hardening's prompt cap or `services/scoring.py`
+  weights.
+- **F-21 — LLM non-determinism.** Same profile, two runs, event
+  sequences differ by 1 event. Temperature 0.2 isn't 0; mock-mode
+  determinism (plan §2.5.1) is not achievable without `temperature=0`.
+- **F-27 — chatbot off-topic refusal at 76% (target 90%).** 7/30 off-topic
+  questions slipped the similarity gate. Bump `PREPULSE_KB_LOW_THRESHOLD`
+  upward and/or add canonical-refusal phrasing into the system prompt.
+- **F-02 — one CVE hallucinated from prose.** Intelligence agent on
+  greenfield cited `CVE-2022-41040` (real CVE mentioned inside an OTX
+  pulse description, but absent from the structured NVD fixture).
+  Acceptable in mock mode; would resolve in live mode.
+
+**Pipeline-side bugs found during the run, fixed in-flight:**
+
+1. Runner didn't call `load_dotenv()` — agents couldn't see the API key
+   and 84 tests crashed with "Could not resolve authentication".
+2. F-26 LLM-as-judge silently returned `0` on errors; rate-limited judge
+   runs all looked like wrong answers. Now returns `None` → `inconclusive`.
+3. F-26 / F-29 conflated chatbot HTTP 502 with "wrong answer" / "successful
+   injection". Now: 5xx → `inconclusive`, excluded from rate denominators.
+   F-29 success rate fell from misreported 76% to 11% on evaluable prompts.
+4. F-29 classifier missed natural-language refusals like *"I'm not able
+   to do that…"*. Added a `REFUSAL_PHRASES` list.
+
+**Final artifacts:**
+
+- [`validation/runs/FINAL_combined/all_runs.jsonl`](validation/runs/FINAL_combined/all_runs.jsonl) — 281 rows, every pass + fail + inconclusive in one chronological file
+- [`validation/reports/FINAL_combined_report.md`](validation/reports/FINAL_combined_report.md) — full breakdown with §7 metrics, Wilson-CI commentary, prioritised recommendations
+- [`validation/README.md`](validation/README.md) — how to re-run
+
+**To re-run:**
+```bash
+.venv/bin/python -m validation.runner --campaign $(date +%Y%m%d_%H%M%S)
+```
+Wall time ≈ 55 min; cost ≈ $2–5 in Anthropic calls per campaign.
+
+UX (Week 3) and Business (Week 4) campaigns from the plan are scaffolded
+under `validation/fixtures/personas/` and `validation/fixtures/business/`
+but are **human-driven**, not in this auto run.

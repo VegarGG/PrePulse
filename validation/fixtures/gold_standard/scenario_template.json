@@ -1,0 +1,41 @@
+{
+  "scenario_id": "TEMPLATE_RENAME_ME",
+  "narrative": "One paragraph in plain English describing the organisation, its situation, and what an expert would expect a competent security platform to flag.",
+  "profile": {
+    "company_name": "",
+    "domain": "",
+    "industry": "fintech | healthcare | e-commerce | manufacturing | legal | education | media | saas | other",
+    "employee_count": 50,
+    "tech_stack": [],
+    "ip_range": null
+  },
+  "expected": {
+    "intelligence": {
+      "min_active_campaigns": 0,
+      "domain_breached": false,
+      "must_cite_pulses": []
+    },
+    "validator": {
+      "must_cite_cves": [],
+      "must_cite_techniques": [],
+      "min_exploitable_count": 0
+    },
+    "hardening": {
+      "min_actions": 0,
+      "preferred_kinds": []
+    },
+    "investigator": {
+      "expected_posture_score": 0,
+      "expected_grade": "F",
+      "must_link_cves": [],
+      "must_link_techniques": []
+    },
+    "remediator": {
+      "must_propose_kinds": [],
+      "max_actions": 5
+    },
+    "supervisor": {
+      "expected_sign_off": ["approved"]
+    }
+  }
+}
