@@ -121,6 +121,8 @@ export interface ChatResponse {
   decision_path: ChatDecisionPath;
   top_chunks: ChatTopChunk[];
   refusal_sentence: string;
+  provider: string;   // "anthropic" | "openai" | "deepseek" | "unknown" | ""
+  model: string;      // raw model name from response_metadata, e.g. "deepseek-v4-flash"
 }
 
 export async function sendChat(messages: ChatTurn[]): Promise<ChatResponse> {

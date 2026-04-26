@@ -48,9 +48,11 @@ def _threshold(name: str, default: float) -> float:
 # Calibrated against sentence-transformers/all-MiniLM-L6-v2 + the seeded KB:
 #   off-topic floor (sourdough / weather / world-cup) tops out around 0.17
 #   in-scope floor (MITRE / ROI / Remediator paraphrases) bottoms out around 0.37
-# 0.25 sits comfortably between the two clusters.
-LOW_THRESHOLD = _threshold("PREPULSE_KB_LOW_THRESHOLD", 0.25)
-HIGH_THRESHOLD = _threshold("PREPULSE_KB_HIGH_THRESHOLD", 0.50)
+# 0.35 catches the off-topic band more aggressively while staying under the
+# in-scope floor; F-27 (validation campaign) showed 7/30 off-topic answers
+# slipping past 0.25, so we raise the gate.
+LOW_THRESHOLD = _threshold("PREPULSE_KB_LOW_THRESHOLD", 0.35)
+HIGH_THRESHOLD = _threshold("PREPULSE_KB_HIGH_THRESHOLD", 0.65)
 
 
 class ChatTurn(BaseModel):
@@ -75,6 +77,32 @@ class ChatResponse(BaseModel):
     decision_path: Literal["similarity_low", "llm_in_scope", "llm_refused", "parse_failed"]
     top_chunks: list[TopChunk] = []
     refusal_sentence: str = REFUSAL
+    # Which provider + model actually answered. Populated from the LLM
+    # response metadata. Empty string when no LLM call was made (e.g.
+    # similarity_low) or when the metadata didn't carry a model name.
+    provider: str = ""
+    model: str = ""
+
+
+def _classify_provider(model_name: str) -> str:
+    """Map a model name string to its provider label."""
+    if not model_name:
+        return ""
+    n = model_name.lower()
+    if n.startswith("claude"):
+        return "anthropic"
+    if n.startswith("deepseek"):
+        return "deepseek"
+    if n.startswith(("gpt", "o1", "o3", "o4")):
+        return "openai"
+    return "unknown"
+
+
+def _extract_model(resp) -> str:
+    """Pull the model name out of an AIMessage / langchain response."""
+    meta = getattr(resp, "response_metadata", None) or {}
+    # ChatAnthropic uses "model"; ChatOpenAI uses "model_name"
+    return str(meta.get("model") or meta.get("model_name") or "")
 
 
 def _format_retrieved_chunks(top_chunks: list[dict]) -> str:
@@ -158,6 +186,9 @@ async def chat(req: ChatRequest) -> ChatResponse:
             elif isinstance(block, str):
                 text += block
 
+    model_name = _extract_model(resp)
+    provider = _classify_provider(model_name)
+
     # Layer 3 (LLM-side scope guardrail) disabled — take the model's text
     # verbatim. The semantic similarity gate above is the only off-topic
     # filter at the LLM stage; jailbreak attempts are still caught upstream
@@ -172,6 +203,8 @@ async def chat(req: ChatRequest) -> ChatResponse:
             similarity=similarity,
             decision_path="llm_refused",
             top_chunks=public,
+            provider=provider,
+            model=model_name,
         )
 
     return ChatResponse(
@@ -180,11 +213,15 @@ async def chat(req: ChatRequest) -> ChatResponse:
         similarity=similarity,
         decision_path="llm_in_scope",
         top_chunks=public,
+        provider=provider,
+        model=model_name,
     )
 
 
 @router.get("/chat/health")
 async def chat_health() -> dict:
+    from backend.llm import available_providers
+
     return {
         "ok": True,
         "kb_doc_count": doc_count(),
@@ -192,4 +229,5 @@ async def chat_health() -> dict:
         "kb_chunk_count": index_size(),
         "low_threshold": LOW_THRESHOLD,
         "high_threshold": HIGH_THRESHOLD,
+        "llm_providers": available_providers(),
     }

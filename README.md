@@ -132,8 +132,12 @@ overridden by exporting shell env vars.
 | Variable | Default | Purpose |
 |---|---|---|
 | `PREPULSE_LIVE` | `0` | `1` switches tools from scripted mocks to real APIs. |
-| `ANTHROPIC_API_KEY` | *(empty)* | Required — agents run real Claude reasoning even in mock mode. |
-| `OPENAI_API_KEY` | *(empty)* | Optional GPT-4o fallback when Anthropic fails. |
+| `PREPULSE_API_PROVIDER` | `0` | LLM provider chain: `0`=Anthropic, `1`=OpenAI, `2`=DeepSeek. The chosen index runs first; the others auto-fall-back via `with_fallbacks` if the chosen one errors. Providers without a key are skipped. Accepts a name too (e.g. `deepseek`). |
+| `ANTHROPIC_API_KEY` / `ANTHROPIC_MODEL` | *(empty)* / `claude-sonnet-4-6` | Provider 0. Default model overridable. |
+| `OPENAI_API_KEY` / `OPENAI_MODEL` | *(empty)* / `gpt-4o` | Provider 1. |
+| `DEEPSEEK_API_KEY` / `DEEPSEEK_MODEL` / `DEEPSEEK_BASE_URL` | *(empty)* / `deepseek-v4-flash` / `https://api.deepseek.com/v1` | Provider 2. OpenAI-compatible, served via `langchain_openai.ChatOpenAI` with a custom `base_url`. |
+| `PREPULSE_KB_LOW_THRESHOLD` / `PREPULSE_KB_HIGH_THRESHOLD` | `0.35` / `0.65` | Chatbot similarity gate (raised from 0.25/0.50 after validation showed 7/30 off-topic questions slipping past 0.25). |
+| `HUGGINGFACE_API_TOKEN` | *(empty)* | Required for the chatbot's embedding gate. Fine-grained token with "Inference Providers" scope. |
 | `PREPULSE_AUTO_APPROVE` | *(unset)* | `1` auto-resolves the human approval gate (for demos or CI). |
 | `PREPULSE_SKIP_SEED` | *(unset)* | `1` skips the 30-day history seed on startup. |
 | `PREPULSE_APPROVAL_TIMEOUT` | `120` | Seconds the orchestrator waits for a human approval before rejecting. |

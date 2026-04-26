@@ -12,6 +12,8 @@ type Message =
       is_in_scope: boolean;
       similarity: number;
       decision_path: ChatDecisionPath;
+      provider: string;
+      model: string;
     }
   | { role: "error"; content: string };
 
@@ -74,6 +76,8 @@ export function ChatWidget() {
           is_in_scope: resp.is_in_scope,
           similarity: resp.similarity,
           decision_path: resp.decision_path,
+          provider: resp.provider,
+          model: resp.model,
         },
       ]);
     } catch (err) {
@@ -220,10 +224,19 @@ function Bubble({ message }: { message: Message }) {
           </div>
         )}
         {message.content}
-        <div className="mt-1.5 flex items-center gap-2 text-[10px] text-muted-foreground/80 font-mono">
+        <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[10px] text-muted-foreground/80 font-mono">
           <span>sim {message.similarity.toFixed(2)}</span>
           <span>·</span>
           <span>{message.decision_path}</span>
+          {message.provider && (
+            <>
+              <span>·</span>
+              <span title={message.model || "unknown"}>
+                {message.provider}
+                {message.model ? ` (${message.model})` : ""}
+              </span>
+            </>
+          )}
         </div>
       </div>
     </div>
